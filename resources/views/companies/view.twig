@@ -1,0 +1,50 @@
+{% extends 'templates/app.twig' %}
+
+    {% block content %}
+<div class="row">
+    <div class="col-md-10">
+        <div id="postlist">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3 class="pull-left">{{ company.name }}   
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="panel-body">
+                <h2>List of Students in {{ company.name }}</h2>
+                <ul>
+                    {% for student in company.students %}
+                    <li> <a href="{{ path_for('students.view', {'id': student.id} ) }}"> {{ student.first_name }} {{ student.last_name }} </a> </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+        </div>
+        
+       </div>
+    </div>
+    <!-- Only the owner of this post and the admin can edit and delete it -->
+     {% if (auth.user.role_id <= 2) %}
+        <div class="text-center">
+            <p><a href="{{ path_for('companies.edit', {'id': company.id } ) }}" class="btn btn-primary">Edit Company</a>
+                </p>
+                <p> <a onclick="return confirm('Are you sure you wish to delete this company?');"  href="{{ path_for('companies.delete', {'id': company.id } ) }}" class="btn btn-warning">Delete Company</a>
+        
+                </p>
+          </div>
+             
+    {% endif %}
+    </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+{% endblock %}

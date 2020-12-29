@@ -1,0 +1,58 @@
+
+<nav class="navbar navbar-default  col-md-12" role="navigation">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                <span class="sr-only">Toggle navigation</span>
+              </button>
+              <a class="navbar-brand" href="{{ path_for('home')}}">DSCE</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+              <ul class="nav navbar-nav navbar-right">
+                
+                <!-- If User is logged in -->
+                {% if auth.user %}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> {{ auth.user.first_name }} {{ auth.user.last_name }} <b class="caret"></b></a>
+                  <span class="dropdown-arrow"></span>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ path_for('users.view', { 'id': auth.user.id }) }}"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a></li> 
+                    <li><a href="{{ path_for('auth.password.change') }}"><i class="fa fa-key" aria-hidden="true"></i> Change Password</a></li>
+
+                    <li class="divider"></li>
+                     <li><a href="{{ path_for('auth.signout')}}"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+                  </ul>
+                </li> 
+
+                      <!-- If User is admin -->
+                      {% if auth.user.role_id < 3 and auth.user.role_id != null %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin menu <b class="caret"></b></a>
+                                <span class="dropdown-arrow"></span>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path_for('users.index') }}">All Users </a></li>
+                                        <li><a href="{{ path_for('students.index') }}">All Students </a></li>  
+                                        <li><a href="{{ path_for('companies.index') }}">All Companies </a></li>  
+                                    </ul>
+                                </li> 
+                          {% endif %}
+                
+                {% else %}
+                 <li><a href="{{ path_for('auth.signup')}}"><i class="fa fa-sign-in" aria-hidden="true"></i> Signup</a></li>
+                 <li><a href="{{ path_for('auth.signin')}}"><i class="fa fa-unlock" aria-hidden="true"></i> Signin</a></li>
+                
+                {% endif %}
+                <!-- <li><a href="{{ path_for('about')}}"><i class="fa fa-address-book-o" aria-hidden="true"></i> About Us</a></li> -->
+               </ul>
+               <form action="{{ path_for('searches.add') }}" method="post" class="navbar-form navbar-right"  role="search">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input class="form-control" name="searchterm" id="navbarInput-01" type="search" placeholder="Search">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-primary"><span class="fui-search"></span> Search</button>
+                    </span>
+                  </div>
+                </div>
+                {{ csrf.field | raw }}
+              </form>
+            </div><!-- /.navbar-collapse -->
+          </nav>

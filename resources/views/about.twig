@@ -1,0 +1,76 @@
+{% extends 'templates/app.twig' %}
+
+	{% block content %}
+<div class="row">
+	<div class="col-md-10">
+		<div id="postlist">
+			<div class="panel">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3 class="pull-left">Student Recruitment Management of ISE Department</h3>
+                            </div>
+                            <!-- <div class="col-sm-3">
+                                <h4 class="pull-right">
+                                <small><em>2014-07-30<br>18:30:00</em></small>
+                                </h4>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="panel-body">
+                View every student's recruited in a specific company.<br>
+                Click on student to see the list of students details.<br>
+                Click on company to see which all students placed in that company.<br>
+                You can search student by his details, placed year and company.
+            </div>
+            
+            <!-- <div class="panel-footer">
+                <span class="label label-default">Welcome</span> <span class="label label-default">Updates</span> <span class="label label-default">July</span>
+            </div>
+        </div>
+        
+        <div class="panel">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3 class="pull-left">Post With image</h3>
+                            </div>
+                            <div class="col-sm-3">
+                                <h4 class="pull-right">
+                                <small><em>2014-07-30 18:30:00</em></small>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="panel-body">
+                <a href="#" class="thumbnail">
+                    <img alt="Image" src="http://i.imgur.com/tAHVmXi.jpg">
+                </a>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation... <a href="#">Read more</a>
+            </div>
+            
+            <div class="panel-footer">
+                <span class="label label-default">Image</span> <span class="label label-default">Updates</span> <span class="label label-default">July</span>
+            </div>
+        </div>
+    </div> -->
+    
+        <div><a href="{{ path_for('students.index') }}" id="loadmore" class="btn btn-primary">Students</a>  <a href="{{ path_for('companies.index') }}" id="loadmore" class="btn btn-primary">Companies</a></div>
+		
+        
+</div>
+	<div class="col-md-1"></div>
+	<div class="col-md-3">
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>
+	{% endblock %}

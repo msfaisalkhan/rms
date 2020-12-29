@@ -1,0 +1,94 @@
+{% extends 'templates/app.twig' %}
+
+  {% block content %}
+
+<div class="row">
+  <div class="col-md-10">
+    <div id="studentlist">
+      <div class="panel">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3 class="pull-left">Students Details</h3>
+                            </div>
+                            <div class="col-sm-3">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+        </div>
+       </div>
+    </div>
+    {% if (auth.user.role_id <= 2) %}
+    <div class="text-center">
+            <a href="{{ path_for('students.add') }}" class="btn btn-primary">Add Student Details</a>
+        </div>
+    {% endif %}
+    </div>
+
+
+
+
+<div class="well">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <!-- <th>#</th> -->
+          <th># USN</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <!-- <th>Email</th> -->
+          <th>Mobile Number</th>
+          <th>Company</th>
+          <th>Placed Year</th>
+          {% if (auth.user.role_id <= 2) %}
+          <th>Edit | Delete</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+           {% for student in students %}
+                    
+        <tr>
+          <!-- <td>{{ student.id }}</td> -->
+          <td><a href="{{path_for('students.view', {'id' :  student.id } )}}">{{ student.usn }} </a> </td>
+          <td><a href="{{path_for('students.view', {'id' :  student.id } )}}">{{ student.first_name }} </a> </td>
+          <td><a href="{{path_for('students.view', {'id' :  student.id } )}}">{{ student.last_name }} </a> </td>
+          
+          <!-- <td>{{ student.email }} </td> -->
+          <td>{{ student.mobile_no }} </td>
+          <td><a href="{{ path_for('companies.view', {'id': student.company.id }) }}">{{student.company.name}}</a> </td>
+          <td>{{ student.placed_year }} </td>
+          {% if (auth.user.role_id <= 2) %}
+          <td>
+              <a href="{{path_for('students.edit', {'id' :  student.id } )}}">
+              <i class="icon-pencil"></i>Edit</a> |
+              <a  onclick="return confirm('Are you sure you wish to delete this student?');" 
+                    href="{{path_for('students.delete', {'id' :  student.id } )}}" role="button" data-toggle="modal"><i class="icon-remove"></i> Delete</a>
+          </td>
+          {% endif %}
+        </tr>
+
+                {% endfor %}
+
+      </tbody>
+    </table>
+</div>
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text">Are you sure you want to delete the student?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+    </div>
+
+    {% endblock %}

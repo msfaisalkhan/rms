@@ -1,0 +1,55 @@
+{% extends 'templates/app.twig' %}
+
+    {% block content %}
+<div class="row">
+    <div class="col-md-10">
+        <div id="searchlist">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3 class="pull-left">{{ search.title }}
+                                    <small class="pull-left "> <a class="btn" href="{{ path_for('students.view', {'id': search.student.id }) }}">
+        {{  search.student.first_name }} {{  search.student.last_name }} </a> </small>
+                                </h3>
+                            </div>
+                            <div class="col-sm-3">
+                                <h4 class="pull-right">
+                                <small> {{ search.created_at }} </small>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="panel-body">
+                {{ search.body }} 
+            </div>
+            
+            <!-- <div class="panel-footer">
+                <span class="label label-default">Welcome</span> <span class="label label-default">Updates</span> <span class="label label-default">July</span>
+            </div> -->
+        </div>
+        
+       </div>
+    </div>
+    <!-- Only the owner of this search and the admin can edit and delete it -->
+     <!-- {% if (auth.user.role_id <= 3) %}
+        <div class="text-center">
+            <p><a href="{{ path_for('searches.edit', {'id': search.id } ) }}" class="btn btn-primary">Edit search</a>
+                </p>
+                <p> <a onclick="return confirm('Are you sure you wish to delete this search?');"  href="{{ path_for('searchs.delete', {'id': search.id } ) }}" class="btn btn-warning">Delete search</a>
+        
+                </p>
+          </div>
+             
+    {% endif %} -->
+    </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+{% endblock %}

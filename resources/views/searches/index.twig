@@ -1,0 +1,73 @@
+{% extends 'templates/app.twig' %}
+
+  {% block content %}
+<div class="row">
+  <div class="col-md-10">
+    <div id="searchlist">
+      <div class="panel">
+                <div class="panel-heading">
+                    <div class="text-center">
+                    {% if user %}
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3 class="pull-left">Search results for {{ searchTerm }} </h3>
+                            </div>
+                            
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+            <div class="panel-body">
+                
+                <div class="container">
+
+
+{% for search in searches %}
+<div class="row col-md-8">
+  <div class="span12">
+    <div class="row">
+      <div class="span8">
+        <h4><strong><a href="{{ path_for('searches.view', {'id': search.id }) }}">{{ search.title }}</a></strong>
+        <small> <a class="btn" href="{{ path_for('users.view', {'id': search.user.id }) }}">
+        {{  search.user.first_name }} {{  search.user.last_name }} </a> </small>
+        </h4>
+       
+      </div>
+    </div>
+    <div class="row">
+    
+      <div class="span10">      
+        <p>
+        {{ search.body| slice(0, 150 ) ~ '...' }}
+         </p>
+      </div>
+    </div>
+   
+  </div>
+</div>
+{% endfor %}
+
+<hr>
+
+
+</div>
+<hr>
+</div>
+
+
+            </div>
+            
+            <div class="panel-footer">
+            </div>
+        </div>
+        
+       </div>
+       <div class="text-center">
+            <a href="{{ path_for('searches.add') }}" class="btn btn-primary">New search</a>
+        </div> 
+    </div>
+</div>
+
+</div>
+  {% endblock %}

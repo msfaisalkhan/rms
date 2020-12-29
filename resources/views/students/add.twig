@@ -1,0 +1,144 @@
+{% extends 'templates/app.twig' %}
+
+	{% block content %}
+<div class="row">
+	<div class="col-md-10">
+		<div id="studentlist">
+			<div class="panel">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3 class="pull-left">Create new student</h3>
+                            </div>
+                            <div class="col-sm-3">
+                                <h4 class="pull-right">
+                                <small> {{ student.created_at }} </small>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="panel-body">
+                <div class="login-form" >
+          <form action="{{ path_for('students.add') }}" method="post" autocomplete="off"> 
+              
+              <div class="form-group {{ errors.first_name ? 'has-error' : '' }}">
+                <label class="login-field-icon fui-user" for="login-first-name">Student First Name</label>
+              <input type="text" class="form-control login-field"  name="first_name" placeholder="Enter student first name" >
+              <label class="login-field-icon fui-user" for="login-first-name"></label>
+              {% if errors.first_name %}
+                <span class="help-block">{{ errors.first_name | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="form-group {{ errors.last_name ? 'has-error' : '' }}">
+              <label class="login-field-icon fui-user" for="login-first-name">Student Last Name</label>
+              <input type="text" class="form-control login-field"  name="last_name" placeholder="Enter student last name" >
+              <label class="login-field-icon fui-user" for="login-first-name"></label>
+              {% if errors.last_name %}
+                <span class="help-block">{{ errors.last_name | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="form-group {{ errors.usn ? 'has-error' : '' }}">
+              <label class="login-field-icon fui-user" for="login-first-name">Student USN</label>
+              <input type="text" class="form-control login-field" name="usn" placeholder="Enter student usn" >
+              <label class="login-field-icon fui-user" for="login-first-name"></label>
+              {% if errors.usn %}
+                <span class="help-block">{{ errors.usn | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="form-group {{ errors.mobile_no ? 'has-error' : '' }}">
+              <label class="login-field-icon fui-user" for="login-first-name">Student Mobile Number</label>
+              <input type="number" class="form-control login-field" name="mobile_no" placeholder="Enter student mobile number" >
+              <label class="login-field-icon fui-user" for="login-first-name"></label>
+              {% if errors.mobile_no %}
+                <span class="help-block">{{ errors.mobile_no | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="form-group {{ errors.email ? 'has-error' : '' }}">
+              <label class="login-field-icon fui-user" for="login-first-name">Student Email</label>
+              <input type="text" class="form-control login-field"  name="email" placeholder="Enter student email" >
+              <label class="login-field-icon fui-user" for="login-first-name"></label>
+              {% if errors.email %}
+                <span class="help-block">{{ errors.email | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="form-group {{ errors.placed_year ? 'has-error' : '' }}">
+              <label class="login-field-icon fui-user" for="login-first-name">Placed Year</label>
+              <input type="number" class="form-control login-field"   name="placed_year" placeholder="Enter student placed year" >
+              <label class="login-field-icon fui-user" for="login-first-name"></label>
+              {% if errors.placed_year %}
+                <span class="help-block">{{ errors.placed_year | first }}</span>
+              {% endif %}
+            </div>
+
+            <div class="form-group {{ errors.company_id ? 'has-error' : '' }}">
+              <label class="login-field-icon fui-user" for="login-first-name">Company Placed</label>
+              <select class="form-control" name="company_id">
+                <option value="">Select Company Name</option>
+                {% for company in companies %}
+                <option value="{{company.id}}">{{company.name}}</option>
+                {% endfor %}
+              </select>
+              {% if errors.company_id %}
+                <span class="help-block">{{ errors.company_id | first }}</span>
+              {% endif %}
+            </div>
+
+            <!-- <div class="form-group {{ errors.department ? 'has-error' : '' }}">
+              <label class="login-field-icon fui-user" for="login-first-name">Select Department</label>
+              
+              <select class="form-control" name="department">
+                <option value="">Select Department</option>
+                <option value="ISE">ISE</option>
+                <option value="CSE">CSE</option>
+                <option value="EC">EC</option>
+                <option value="EE">EE</option>
+                <option value="ME">ME</option>
+                <option value="CV">CV</option>
+                <option value="IME">IME</option>
+                <option value="CTM">CTM</option>
+                <option value="ML">ML</option>
+             
+              </select>
+              <label class="login-field-icon fui-user" for="login-first-name"></label>
+              {% if errors.department %}
+                <span class="help-block">{{ errors.department | first }}</span>
+              {% endif %}
+            </div> -->
+
+            <div class="form-group {{ errors.position ? 'has-error' : '' }}">
+              <label class="login-field-icon fui-user" for="login-first-name">Placed Position (optional)</label>
+              <input type="text" class="form-control login-field"  name="position" placeholder="Enter student position at company" >
+              <label class="login-field-icon fui-user" for="login-first-name"></label>
+              {% if errors.position %}
+                <span class="help-block">{{ errors.position | first }}</span>
+              {% endif %}
+            </div>
+
+           
+            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            
+             {{ csrf.field | raw }}
+            </form>
+          </div>
+            </div>
+            
+        </div>
+        
+       </div>
+    </div>
+    </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+{% endblock %}
